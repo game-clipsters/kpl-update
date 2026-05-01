@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KPL Contact - Season 1</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0b1d3a">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      background: #f2f4f8;
+      color: #1e1e1e;
+      padding-bottom: 70px;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(90deg, #0b1d3a, #1a3d7c);
+      color: white;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    header h1 {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    /* NAVBAR */
+    nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* CONTAINER */
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px;
+    }
+
+    /* PAGE TITLE */
+    .page-title {
+      text-align: center;
+      font-size: 26px;
+      font-weight: 900;
+      color: #0b1d3a;
+      margin-bottom: 20px;
+    }
+
+    /* CONTACT CARD */
+    .contact-card {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0px 5px 15px rgba(0,0,0,0.12);
+      margin-bottom: 20px;
+      border-left: 6px solid #ffb300;
+    }
+
+    .contact-card h3 {
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 10px;
+      color: #0b1d3a;
+    }
+
+    .contact-card p {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* BUTTON */
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 18px;
+      background: linear-gradient(90deg, #ffb300, #ff9800);
+      color: black;
+      font-weight: 900;
+      text-decoration: none;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.15);
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-red {
+      background: linear-gradient(90deg, #e53935, #b71c1c);
+      color: white;
+    }
+
+    .btn-green {
+      background: linear-gradient(90deg, #43a047, #2e7d32);
+      color: white;
+    }
+
+    /* FORM */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    input, textarea {
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+      font-weight: 600;
+      outline: none;
+      background: #f9f9f9;
+    }
+
+    textarea {
+      resize: none;
+      height: 110px;
+    }
+
+    input:focus, textarea:focus {
+      border: 1px solid #0b1d3a;
+      background: white;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #0b1d3a;
+      color: white;
+      text-align: center;
+      padding: 14px;
+      margin-top: 30px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* MOBILE RESPONSIVE NAVBAR */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 5px;
+      }
+
+      nav a {
+        flex: 0 0 auto;
+      }
+    }
+
+    /* SPLASH SCREEN */
+    #splashScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, #0b1d3a, #1a3d7c);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 999999;
+      color: white;
+      text-align: center;
+    }
+
+    #splashScreen h2 {
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    #splashScreen p {
+      font-size: 14px;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+
+    .loader {
+      margin-top: 20px;
+      width: 55px;
+      height: 55px;
+      border: 6px solid rgba(255, 255, 255, 0.3);
+      border-top: 6px solid #ffb300;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* BOTTOM NAV (MOBILE APP STYLE) */
+    .bottom-nav {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .bottom-nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: white;
+        border-top: 1px solid #ddd;
+        padding: 10px 0;
+        z-index: 9999;
+        box-shadow: 0px -3px 10px rgba(0,0,0,0.15);
+      }
+
+      .bottom-nav a {
+        text-decoration: none;
+        color: #0b1d3a;
+        font-size: 12px;
+        font-weight: 800;
+        text-align: center;
+        flex: 1;
+      }
+
+      .bottom-nav a span {
+        display: block;
+        font-size: 20px;
+        margin-bottom: 3px;
+      }
+
+      .bottom-nav a:hover {
+        color: #e53935;
+      }
+    }
+
+    /* ACTIVE NAV ITEM */
+    .bottom-nav a.active {
+      color: #e53935;
+    }
+
+    .bottom-nav a.active span {
+      transform: scale(1.2);
+      display: block;
+    }
+
+    /* MORE MENU POPUP */
+    .more-menu {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .more-menu {
+        display: none;
+        position: fixed;
+        bottom: 70px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 95%;
+        max-width: 420px;
+        background: white;
+        border-radius: 18px;
+        box-shadow: 0px 8px 25px rgba(0,0,0,0.25);
+        padding: 15px;
+        z-index: 99999;
+        animation: popup 0.3s ease-in-out;
+      }
+
+      @keyframes popup {
+        from { transform: translateX(-50%) translateY(30px); opacity: 0; }
+        to { transform: translateX(-50%) translateY(0px); opacity: 1; }
+      }
+
+      .more-menu a {
+        display: block;
+        padding: 12px;
+        text-decoration: none;
+        font-weight: 800;
+        color: #0b1d3a;
+        border-radius: 12px;
+        margin-bottom: 8px;
+        background: #f4f6f9;
+        text-align: center;
+      }
+
+      .more-menu a:hover {
+        background: #ffb300;
+        color: black;
+      }
+
+      .close-btn {
+        display: block;
+        padding: 12px;
+        text-align: center;
+        background: #e53935;
+        color: white;
+        font-weight: 900;
+        border-radius: 12px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- SPLASH SCREEN -->
+  <div id="splashScreen">
+    <h2>KPL - Season 1</h2>
+    <p>Khamhariya Premier League</p>
+    <div class="loader"></div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <h1>KPL - Season 1</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="points.html">Points Table</a>
+      <a href="teams.html">Teams</a>
+      <a href="rules.html">Rules</a>
+      <a href="results.html">Results</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2 class="page-title">Contact & Organizer</h2>
+
+    <div class="contact-card">
+      <h3>Organizer Details</h3>
+      <p>Organizer: <b>Khursid Khan</b></p>
+      <p>Phone: <b>8766831653</b></p>
+      <p>Location: <b><a href="https://maps.app.goo.gl/fcmrE8CB95utbS1E8" target="_blank">Khamhariya Ground</a></b></p>
+
+      <a class="btn btn-green" href="tel:8766831653">📞 Call Now</a>
+      <a class="btn btn-red" href="https://wa.me/918766831653" target="_blank">💬 WhatsApp</a>
+    </div>
+
+    <div class="contact-card">
+      <h3>Send Message</h3>
+      <p>Fill this form for tournament enquiry</p>
+
+      <form>
+        <input type="text" placeholder="Enter Your Name" required>
+        <input type="number" placeholder="Enter Mobile Number" required>
+        <textarea placeholder="Write Your Message..." required></textarea>
+        <button type="submit" class="btn">📩 Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    © 2026 Khamhariya Premier League | All Rights Reserved
+  </footer>
+
+  <!-- BOTTOM NAVIGATION -->
+  <div class="bottom-nav">
+    <a href="index.html"><span>🏠</span>Home</a>
+    <a href="schedule.html"><span>📅</span>Schedule</a>
+    <a href="points.html"><span>📊</span>Points</a>
+    <a href="teams.html"><span>👥</span>Teams</a>
+    <a href="#" id="moreBtn"><span>☰</span>More</a>
+  </div>
+
+  <!-- MORE MENU POPUP -->
+  <div class="more-menu" id="moreMenu">
+    <a href="rules.html">📌 Rules</a>
+    <a href="results.html">🏆 Results</a>
+    <a href="contact.html">☎️ Contact</a>
+    <div class="close-btn" id="closeMenu">Close ✖</div>
+  </div>
+
+  <script>
+    // SPLASH SCREEN AUTO HIDE
+    window.addEventListener("load", function () {
+      setTimeout(() => {
+        document.getElementById("splashScreen").style.display = "none";
+      }, 1500);
+    });
+
+    // MORE MENU SYSTEM
+    const moreBtn = document.getElementById("moreBtn");
+    const moreMenu = document.getElementById("moreMenu");
+    const closeMenu = document.getElementById("closeMenu");
+
+    moreBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      moreMenu.style.display = "block";
+    });
+
+    closeMenu.addEventListener("click", function () {
+      moreMenu.style.display = "none";
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!moreMenu.contains(e.target) && e.target !== moreBtn) {
+        moreMenu.style.display = "none";
+      }
+    });
+
+    // ACTIVE PAGE HIGHLIGHT
+    const navLinks = document.querySelectorAll(".bottom-nav a");
+    const currentPage = window.location.pathname.split("/").pop();
+
+    navLinks.forEach(link => {
+      const linkPage = link.getAttribute("href");
+      if (linkPage === currentPage) {
+        link.classList.add("active");
+      }
+      if (currentPage === "" && linkPage === "index.html") {
+        link.classList.add("active");
+      }
+    });
+
+    // SERVICE WORKER REGISTER (PWA)
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js");
+    }
+  </script>
+
+</body>
+</html>
