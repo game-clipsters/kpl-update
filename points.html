@@ -195,21 +195,23 @@
       display: none;
     }
 
-    @media (max-width: 768px) {
-      .bottom-nav {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: white;
-        border-top: 1px solid #ddd;
-        padding: 10px 0;
-        z-index: 9999;
-        box-shadow: 0px -3px 10px rgba(0,0,0,0.15);
-      }
+@media (max-width: 768px) {
+  .bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-top: 1px solid #ddd;
+    padding: 10px 0;
+    padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    z-index: 99999;
+    box-shadow: 0px -3px 10px rgba(0,0,0,0.15);
+  }
+}
 
       .bottom-nav a {
         text-decoration: none;
@@ -297,6 +299,11 @@
         margin-top: 10px;
       }
     }
+    .table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
   </style>
 </head>
 
@@ -325,7 +332,7 @@
 
   <div class="container">
     <h2 class="page-title">Points Table</h2>
-
+    <div class="table-wrap">
     <table>
       <tr>
         <th>Rank</th>
@@ -419,6 +426,7 @@
     -->
 
     </table>
+    </div>  
   </div>
 
   <footer>
