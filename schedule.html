@@ -20,7 +20,7 @@
     body {
       background: #f2f4f8;
       color: #1e1e1e;
-      padding-bottom: 130px;
+      padding-bottom: 170px;
     }
 
     /* HEADER */
@@ -209,21 +209,23 @@
       display: none;
     }
 
-    @media (max-width: 768px) {
-      .bottom-nav {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: white;
-        border-top: 1px solid #ddd;
-        padding: 10px 0;
-        z-index: 9999;
-        box-shadow: 0px -3px 10px rgba(0,0,0,0.15);
-      }
+@media (max-width: 768px) {
+  .bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-top: 1px solid #ddd;
+    padding: 10px 0;
+    padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    z-index: 99999;
+    box-shadow: 0px -3px 10px rgba(0,0,0,0.15);
+  }
+}
 
       .bottom-nav a {
         text-decoration: none;
@@ -341,6 +343,7 @@
     <h2 class="page-title">Match Schedule</h2>
 
     <div class="round-title round1">Round 1 (First Matches for All Teams)</div>
+    <div class="table-wrap">
     <table>
       <tr>
         <th>Match</th><th>Team 1</th><th>Team 2</th><th>Date</th><th>Time</th><th>Venue</th>
@@ -358,8 +361,10 @@
       <tr><td>Match 8</td><td>Team 15</td><td>Team 16</td><td>13 May 2026</td><td>11:15 AM</td><td>Khamhariya Ground</td></tr>
     -->
     </table>
+    </div>
 
     <div class="round-title round2">Round 2 (Winner Teams)</div>
+    <div class="table-wrap">
     <table>
       <tr>
         <th>Match</th><th>Team 1</th><th>Team 2</th><th>Date</th><th>Time</th><th>Venue</th>
@@ -373,8 +378,10 @@
 
     -->
     </table>
+    </div>  
 
     <div class="round-title round3">Round 3 (Qualified Teams)</div>
+    <div class="table-wrap">
     <table>
       <tr>
         <th>Match</th><th>Team 1</th><th>Team 2</th><th>Date</th><th>Time</th><th>Venue</th>
@@ -386,8 +393,10 @@
     -->
 
     </table>
+    </div>  
 
     <div class="round-title round4">Round 4 (Semi Finals)</div>
+    <div class="table-wrap">
     <table>
       <tr>
         <th>Match</th><th>Team 1</th><th>Team 2</th><th>Date</th><th>Time</th><th>Venue</th>
@@ -397,8 +406,10 @@
       <tr><td>Match 30</td><td>Semi Final Team 3</td><td>Semi Final Team 4</td><td>16 May 2026</td><td>10:00 AM</td><td>Khamhariya Ground</td></tr>
     -->
     </table>
+    </div>  
 
     <div class="round-title round5">Round 5 (Final Match)</div>
+    <div class="table-wrap"> 
     <table>
       <tr>
         <th>Match</th><th>Team 1</th><th>Team 2</th><th>Date</th><th>Time</th><th>Venue</th>
@@ -407,6 +418,7 @@
       <tr><td>Match 31</td><td>Final Team 1</td><td>Final Team 2</td><td>17 May 2026</td><td>10:00 AM</td><td>Khamhariya Ground</td></tr>
     -->
     </table>
+    </div>   
   </div>
 
   <footer>
