@@ -340,6 +340,93 @@
       }
     }
   </style>
+
+
+<script>
+    // SPLASH SCREEN AUTO HIDE
+    window.addEventListener("load", function () {
+      setTimeout(() => {
+        document.getElementById("splashScreen").style.display = "none";
+        startCountdown();        // Timer start
+      }, 1500);
+    });
+
+    // ==================== COUNTDOWN TIMER ====================
+    function startCountdown() {
+      const matchDate = new Date("2026-05-12T09:00:00").getTime();
+      const countdownElement = document.getElementById("countdown");
+
+      if (!countdownElement) {
+        console.error("Countdown element not found!");
+        return;
+      }
+
+      const interval = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = matchDate - now;
+
+        if (distance < 0) {
+          countdownElement.style.color = "#e53935";
+          countdownElement.innerHTML = "Match Started! 🏏";
+          clearInterval(interval);
+          return;
+        }
+
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        countdownElement.innerHTML = `
+          ${hours.toString().padStart(2, '0')}h &nbsp; 
+          ${minutes.toString().padStart(2, '0')}m &nbsp; 
+          ${seconds.toString().padStart(2, '0')}s
+        `;
+      }, 1000);
+    }
+
+    // MORE MENU SYSTEM
+    const moreBtn = document.getElementById("moreBtn");
+    const moreMenu = document.getElementById("moreMenu");
+    const closeMenu = document.getElementById("closeMenu");
+
+    if (moreBtn && moreMenu && closeMenu) {
+      moreBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        moreMenu.style.display = "block";
+      });
+
+      closeMenu.addEventListener("click", function () {
+        moreMenu.style.display = "none";
+      });
+
+      document.addEventListener("click", function (e) {
+        if (!moreMenu.contains(e.target) && e.target !== moreBtn) {
+          moreMenu.style.display = "none";
+        }
+      });
+    }
+
+    // ACTIVE PAGE HIGHLIGHT
+    const navLinks = document.querySelectorAll(".bottom-nav a");
+    const currentPage = window.location.pathname.split("/").pop();
+    navLinks.forEach(link => {
+      const linkPage = link.getAttribute("href");
+      if (linkPage === currentPage || (currentPage === "" && linkPage === "index.html")) {
+        link.classList.add("active");
+      }
+    });
+
+    // PWA
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js");
+    }
+</script>
+
+
+
+
+
+
 </head>
 
 <body>
@@ -369,6 +456,31 @@
   <section class="hero">
     <img src="poster.jpg" alt="Khamhariya Premier League Poster">
   </section>
+
+
+      <br><br>
+    
+    <h2 class="section-title">Upcoming Match</h2>
+    
+    <!-- Countdown Timer - Heading ke neeche -->
+    <div style="background: linear-gradient(90deg, #0b1d3a, #1a3d7c); color: white; padding: 15px; border-radius: 16px; text-align: center; margin-bottom: 18px; box-shadow: 0px 5px 5px rgba(0,0,0,0.2);">
+      <p style="margin: 0 0 8px 0; font-size: 15px; font-weight: 600; opacity: 0.9;">
+        First Match Starts In
+      </p>
+      <div id="countdown" style="font-size: 28px; font-weight: 900; letter-spacing: 3px; color: #ffb300;">
+        -- : -- : --
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Match 1</h3>
+      <p>
+        <b>Khamhariya-A</b> vs <b>XYZ</b> (Date: 12 May 2026, Time: 9:00 AM)<br>
+      </p>
+      <a class="btn" href="schedule.html">View Full Schedule</a>
+    </div>
+
+
 
   <!-- INSTALL BUTTON -->
   <div style="text-align:center; margin-top:15px;">
@@ -423,21 +535,8 @@
       </div>
     </div>
 
-    <br><br>
+    <br>
 
-    <h2 class="section-title">Upcoming Match</h2>
-    <div class="card">
-      <h3>Match 1</h3>
-      <p>
-        <b>Khamhariya-A</b> vs <b>Unknown</b><br>
-        Date: 12 May 2026<br>
-        Time: 9:00 AM<br>
-        Venue: Khamhariya Ground
-      </p>
-      <a class="btn" href="schedule.html">View Full Schedule</a>
-    </div>
-
-    <br><br>
 
     <h2 class="section-title">Latest Result</h2>
     <div class="card">
