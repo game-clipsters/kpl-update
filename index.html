@@ -391,7 +391,7 @@ function startCountdown() {
 
     // Show Timer
     countdownElement.innerHTML = `
-      ${days} Days <br>
+      ${days} Days, 
       ${hours.toString().padStart(2, '0')}h :
       ${minutes.toString().padStart(2, '0')}m :
       ${seconds.toString().padStart(2, '0')}s
@@ -448,7 +448,7 @@ window.addEventListener("load", function () {
   </section>
 
     
-    <h2 class="section-title"><b>Upcoming Match</b> (17 May 2026)</h2>
+    <h2 class="section-title">Upcoming Match <span style="color: red; font-size: 0.8em;"> (17 May 2026)</span></h2>
     <div class="card">
       <h3>Match 1</h3>
       <p>
@@ -457,16 +457,19 @@ window.addEventListener("load", function () {
 
       <!-- 🔥 Countdown Timer -->
       <div style="margin: 15px 0; padding: 12px; background: #fff3e0; border-radius: 12px; text-align: center; border: 2px solid #ffb300;">
-        <p style="font-weight: 800; color: #0b1d3a; margin-bottom: 8px;">
+        <p style="font-weight: 500; color: #0b1d3a; margin-bottom: 1px;">
           First Match Starts In
         </p>
-        <div id="countdown" style="font-size: 22px; font-weight: 900; color: #e53935; letter-spacing: 2px;">
+        <div id="countdown" style="font-size: 10px; font-weight: 1000; color: #e53935; letter-spacing: 2px;">
           -- : -- : --
         </div>
       </div>
 
       <a class="btn" href="schedule.html">View Full Schedule</a>
+      <a class="btn" href="results.html">View All Results</a>
     </div>
+
+    
 
 
 
@@ -539,17 +542,19 @@ window.addEventListener("load", function () {
 
     <br><br> -->
 
+ <!--
     <h2 class="section-title">Latest Result</h2>
     <div class="card">
       <h3>Match Result</h3>
       <p>Match Coming Soon</p>
-   <!--    <p>
+      <p>
         Team 1 won by 15 runs<br>
         Man of the Match: Player A
       </p>
-    -->
+   
       <a class="btn" href="results.html">View All Results</a>
     </div>
+     -->
 
   </div>
 
