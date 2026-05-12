@@ -343,44 +343,77 @@
 
 
 <script>
-    // ... purana script yahin tak hai ...
 
-    // ==================== COUNTDOWN TIMER ====================
-    function startCountdown() {
-      // Match Date & Time (Change kar sakte ho)
-      const matchDate = new Date("2026-05-17T09:00:00").getTime();
+function startCountdown() {
 
-      const countdownElement = document.getElementById("countdown");
+  // Match Date
+  const matchDate = new Date("2026-05-17T09:00:00").getTime();
 
-      const interval = setInterval(() => {
-        const now = new Date().getTime();
-        const distance = matchDate - now;
+  const countdownElement = document.getElementById("countdown");
 
-        if (distance < 0) {
-          countdownElement.innerHTML = `<span style="color:#e53935; font-size:18px;">Match Started! 🏏</span>`;
-          clearInterval(interval);
-          return;
-        }
+  const interval = setInterval(() => {
 
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    const now = new Date().getTime();
+    const distance = matchDate - now;
 
-        countdownElement.innerHTML = `
-          ${hours.toString().padStart(2, '0')}h 
-          ${minutes.toString().padStart(2, '0')}m 
-          ${seconds.toString().padStart(2, '0')}s
-        `;
-      }, 1000);
+    // Match Start
+    if (distance < 0) {
+
+      countdownElement.innerHTML =
+      `<span style="color:#e53935;font-size:20px;">
+        Match Started! 🏏
+      </span>`;
+
+      clearInterval(interval);
+      return;
     }
 
-    // Page load hone ke baad timer start
-    window.addEventListener("load", function () {
-      setTimeout(() => {
-        document.getElementById("splashScreen").style.display = "none";
-        startCountdown();   // ← Ye line add kiya
-      }, 1500);
-    });
+    // Days
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+    // Hours
+    const hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24))
+      / (1000 * 60 * 60)
+    );
+
+    // Minutes
+    const minutes = Math.floor(
+      (distance % (1000 * 60 * 60))
+      / (1000 * 60)
+    );
+
+    // Seconds
+    const seconds = Math.floor(
+      (distance % (1000 * 60))
+      / 1000
+    );
+
+    // Show Timer
+    countdownElement.innerHTML = `
+      ${days} Days <br>
+      ${hours.toString().padStart(2, '0')}h :
+      ${minutes.toString().padStart(2, '0')}m :
+      ${seconds.toString().padStart(2, '0')}s
+    `;
+
+  }, 1000);
+}
+
+
+// Page Load
+window.addEventListener("load", function () {
+
+  setTimeout(() => {
+
+    document.getElementById("splashScreen").style.display = "none";
+
+    startCountdown();
+
+  }, 1500);
+
+});
+
 </script>
 
 
